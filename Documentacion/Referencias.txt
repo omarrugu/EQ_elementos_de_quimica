@@ -1,0 +1,8 @@
+Repositorio de GitHub:
+https://github.com/Sergioarc/RealidadAumentada.git
+
+Herramienta para usar la Realidad aumentada, Vuforia:
+https://developer.vuforia.com/
+
+Para hacer el desarrollo de la aplicación, Unity:
+https://unity3d.com/es
