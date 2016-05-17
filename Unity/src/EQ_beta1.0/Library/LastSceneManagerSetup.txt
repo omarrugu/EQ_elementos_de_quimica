@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Vistas/PantallaMenu.unity
+- path: Assets/Vistas/camaraRA.unity
   isLoaded: 1
   isActive: 1
