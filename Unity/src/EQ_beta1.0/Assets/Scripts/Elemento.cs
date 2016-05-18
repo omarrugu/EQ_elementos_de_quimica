@@ -20,7 +20,6 @@ public class Elemento : MonoBehaviour {
 		//Leer xml y asignarlos a cada atributo del elemento
 
 		XmlReader reader = XmlReader.Create("Assets/xml/Config.xml");
-
 		while (reader.Read()){
 			if (reader.NodeType == XmlNodeType.Element && reader.Name == "Elementos"){
 				while (reader.NodeType != XmlNodeType.EndElement){
