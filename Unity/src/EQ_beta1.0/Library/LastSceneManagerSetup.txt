@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Vistas/Instrucciones.unity
+- path: Assets/Vistas/CargadorAplicacion.unity
   isLoaded: 1
   isActive: 1
