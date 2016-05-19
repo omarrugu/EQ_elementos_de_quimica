@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Vistas/PantallaInicio.unity
-=======
-- path: Assets/Vistas/CargadorAplicacion.unity
->>>>>>> 0ded50d5bc7927fc177fb13f6ccb38c548fbcfe1
+- path: Assets/Vistas/explorarElementos.unity
   isLoaded: 1
   isActive: 1

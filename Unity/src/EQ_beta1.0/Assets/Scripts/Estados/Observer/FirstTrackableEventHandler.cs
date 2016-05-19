@@ -33,8 +33,11 @@ namespace Vuforia
         #region PUBLIC_MEMBER_VARIABLES
         public State estado;
 
-        //para identificar la marca y así saber que marca apareció o desapareció, debe ser distinto de 0
+        //Identifica la transición a un estado
         public int enlace;
+		public string nombreElem; //identificador del QR(elemento)
+		public static Elemento elem;
+
 		#endregion // PRIVATE_MEMBER_VARIABLES
 
 
@@ -46,26 +49,25 @@ namespace Vuforia
 		/// </summary>
 		public virtual void OnTrackableStateChanged(TrackableBehaviour.Status previousStatus,
 			TrackableBehaviour.Status newStatus){
-            if ((newStatus == TrackableBehaviour.Status.DETECTED ||
-                newStatus == TrackableBehaviour.Status.TRACKED ||
-                newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED))
-            {
-                Debug.Log("Encuentra");
-                if (found == 0)
-                {
+            if ((newStatus == TrackableBehaviour.Status.DETECTED || newStatus == TrackableBehaviour.Status.TRACKED || 
+				newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)){
+
+                print("Encontra un elemento");
+                if (found == 0){
                     found = 1;
-                    estado.changeState(id);
+					FirstTrackableEventHandler.elem = new Elemento(nombreElem);
+                    estado.changeState(enlace);
                 }
             }
-            else if(found==1)
-            {
-                found = 0;
-                estado.changeState(-id);
+            else if(found==1){
+				print ("No se encontro ningun elemento");
+				found = 0;
+				estado.changeState(-enlace);
             }
 
         }
 
-        #endregion // PUBLIC_METHODS
+        #endregion
 
 
 

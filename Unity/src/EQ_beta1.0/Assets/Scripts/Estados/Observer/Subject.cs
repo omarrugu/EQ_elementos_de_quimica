@@ -2,8 +2,7 @@
 using System.Collections;
 namespace Vuforia
 {
-    public interface Subject
-    {
+    public interface Subject{
 
         void registerObserver(Observer o);
         void removeObserver(Observer o);
