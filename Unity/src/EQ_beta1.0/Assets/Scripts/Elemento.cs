@@ -16,122 +16,67 @@ public class Elemento : MonoBehaviour {
 	int numeroAtomico = 0; //Número atómico
 
 	//Método constructor que crea un elemento con su respectivos valores de una rchivo fuente xml
-	public Elemento(string nombre){
-		//Leer xml y asignarlos a cada atributo del elemento
+	public Elemento(string name){
 
-		XmlReader reader = XmlReader.Create("Assets/xml/Config.xml");
-		while (reader.Read()){
-			if (reader.NodeType == XmlNodeType.Element && reader.Name == "Elementos"){
-				while (reader.NodeType != XmlNodeType.EndElement){
-					reader.Read();
-					//Identifica el nodo del elemento
-					if (reader.Name == nombre){
-						while (reader.NodeType != XmlNodeType.EndElement){
-							reader.Read();
-							//Identifica el atributo nombre
-							if(reader.Name == "Nombre"){
-								while (reader.NodeType != XmlNodeType.EndElement){
-									reader.Read();
-									if (reader.NodeType == XmlNodeType.Text){
-										this.nombre = reader.Value;
-										print("Nombre: " + this.nombre);
-									}
-								}
-								reader.Read();
-							}
-							//Identifica el atributo Símbolo atómico
-							if(reader.Name == "SimboloAtomico"){
-								while (reader.NodeType != XmlNodeType.EndElement){
-									reader.Read();
-									if (reader.NodeType == XmlNodeType.Text){
-										this.simbolo = reader.Value;
-										print("Símbolo Atómico: " + this.simbolo);
-									}
-								}
-								reader.Read ();
-							}
+		//Creamos un documento y lo cargamos con los datos del XML.
+		XmlDocument documento = new XmlDocument();
+		documento.Load("Assets/xml/Config.xml");
 
-							//Identifica el atributo Descripción del elemento
-							if(reader.Name == "DescripcionElemento"){
-								while (reader.NodeType != XmlNodeType.EndElement){
-									reader.Read();
-									if (reader.NodeType == XmlNodeType.Text){
-										this.descripElem = reader.Value;
-										print("Descripción del elemento: " + this.descripElem);
-									}
-								}
-								reader.Read ();
-							}
+		//Obtenemos una colección con todos los elementos.
+		XmlNodeList listaElementos = documento.SelectNodes("elementos/elemento");
 
-							//Identifica el atributo Descripción del modelo atómico
-							if(reader.Name == "DescripcionModeloAtomico"){
-								while (reader.NodeType != XmlNodeType.EndElement){
-									reader.Read();
-									if (reader.NodeType == XmlNodeType.Text){
-										this.descripModAto = reader.Value;
-										print("Descripción del modelo atómico: " + this.descripModAto);
-									}
-								}
-								reader.Read ();
-							}
+		//Creamos un único elemento.
+		XmlNode elemento;
 
-							//Identifica el atributo uso y aplicaciones
-							if(reader.Name == "UsosAplicaciones"){
-								while (reader.NodeType != XmlNodeType.EndElement){
-									reader.Read();
-									if (reader.NodeType == XmlNodeType.Text){
-										this.usoApli = reader.Value;
-										print("Uso y aplicaciones: " + this.usoApli);
-									}
-								}
-								reader.Read ();
-							}
+		//Recorremos toda la lista de empleados.
+		for (int i = 0; i < listaElementos.Count; i++){
+			//Obtenemos cada empleado.
+			elemento = listaElementos.Item(i);
 
-							//Identifica el atributo Masa atómica
-							if(reader.Name == "MasaAtomica"){
-								while (reader.NodeType != XmlNodeType.EndElement){
-									reader.Read();
-									if (reader.NodeType == XmlNodeType.Text){
-										this.masaAtomica = Single.Parse(reader.Value);
-										print("Masa atómica: " + this.masaAtomica);
-									}
-								}
-								reader.Read ();
-							}
+			//Seleccionamos el nombre del elemento.
+			string nombreElem = Convert.ToString(elemento.SelectSingleNode("Nombre").InnerText);
 
-							//Identifica el atributo Número atómico
-							if(reader.Name == "NumeroAtomico"){
-								while (reader.NodeType != XmlNodeType.EndElement){
-									reader.Read();
-									if (reader.NodeType == XmlNodeType.Text){
-										this.numeroAtomico = Int32.Parse(reader.Value);
-										print("Número atómico: " + this.numeroAtomico);
-									}
-								}
-								reader.Read ();
-							}
+			//Comprobamos que el id de empleado sea el mismo que el número introducido por el usuario.
+			if (name == nombreElem) {
 
-							//Identifica el atributo Número atómico
-							if(reader.Name == "Fuente"){
-								while (reader.NodeType != XmlNodeType.EndElement){
-									reader.Read();
-									if (reader.NodeType == XmlNodeType.Text){
-										this.fuente = reader.Value;
-										print("Fuente: " + this.fuente);
-									}
-								}
-								reader.Read ();
-							}
-						}
-					} 
-				}
+				print ("El nombre es el mismo");
+				//Obtenemos el nombre.
+				print ("Nombre: " + elemento.SelectSingleNode ("Nombre").InnerText);
+				this.nombre = Convert.ToString(elemento.SelectSingleNode("Nombre").InnerText);
+					
+				//Obtenemos el símbolo atómico.
+				print ("Símbolo atómico: " + elemento.SelectSingleNode ("SimboloAtomico").InnerText);
+				this.simbolo = Convert.ToString(elemento.SelectSingleNode ("SimboloAtomico").InnerText);
+
+				//Obtenemos la descripción del elemento.
+				print ("Descripción del elemento: " + elemento.SelectSingleNode ("DescripcionElemento").InnerText);
+				this.descripElem = Convert.ToString(elemento.SelectSingleNode ("DescripcionElemento").InnerText);
+					
+				//Obtenemos la descripción del modelo atómico.
+				print ("Descripción del modelo atómico: " + elemento.SelectSingleNode ("DescripcionModeloAtomico").InnerText);
+				this.descripModAto = Convert.ToString(elemento.SelectSingleNode ("DescripcionModeloAtomico").InnerText);
+
+				//Obtenemos el uso y aplicaciones.
+				print ("Uso y aplicaciones: " + elemento.SelectSingleNode ("UsosAplicaciones").InnerText);
+				this.usoApli = Convert.ToString (elemento.SelectSingleNode ("DescripcionModeloAtomico").InnerText);
+
+				//Obtenemos la masa atómica.
+				print ("Masa atómica: " + elemento.SelectSingleNode ("MasaAtomica").InnerText);
+				this.masaAtomica = Convert.ToSingle (elemento.SelectSingleNode ("MasaAtomica").InnerText);
+
+				//Obtenemos el numero atómico.
+				print ("Numero atómico: " + elemento.SelectSingleNode ("NumeroAtomico").InnerText);
+				this.numeroAtomico = Convert.ToInt32 (elemento.SelectSingleNode ("NumeroAtomico").InnerText);
+
+				//Obtenemos la fuente.
+				print ("Fuente: " + elemento.SelectSingleNode ("Fuente").InnerText);
+				this.fuente = Convert.ToString (elemento.SelectSingleNode ("Fuente").InnerText);
+
+			} else {
+				print ("El elemento no se encuentra en el XML o en la base de datos de vuforia");
 			}
-
 		}
+		
 	}
-
-	void Start(){
-		Debug.Log ("Hola mundo");
-		new Elemento ("Oro");
-	}
+		
 }
